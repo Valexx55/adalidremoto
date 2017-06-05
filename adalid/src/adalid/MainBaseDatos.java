@@ -10,11 +10,16 @@ public class MainBaseDatos {
 		EmpleadoService empleado_service = null;
 		
 		empleado_service = new EmpleadoService();
-		lista_empleados = empleado_service.getEmpleados();
-	
+		//lista_empleados = empleado_service.getEmpleados();
+		lista_empleados = empleado_service.getEmpleadosByDpto(10);
+		
+		System.out.println("Nempleados = " + lista_empleados.size());
+		
+		int contador = 0;
 		for (Empleado e: lista_empleados)
 		{
-			System.out.println("Nombre = " + e.getNombre());
+			contador = contador+1;
+			System.out.println("Nombre = " +contador + " " + e.getNombre());
 		}
 	}
 

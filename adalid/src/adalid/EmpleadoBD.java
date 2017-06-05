@@ -67,5 +67,52 @@ public class EmpleadoBD {
 		return l_empleados;
 	}
 	
+	
+	public List<Empleado> getEmpleadosBDByDpto (int dpto)
+	{
+		List<Empleado> l_empleados = null;
+		
+
+
+		Connection connection = null;
+		Statement statement = null;
+		ResultSet resultset = null;
+
+		try {
+			
+			// obtengo la conexión
+			connection = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:xe", "HR", "adalid");
+			// creo el statement
+			statement = connection.createStatement();
+			// ejecuto la consulta
+			resultset = statement.executeQuery("SELECT FIRST_NAME FROM EMPLOYEES WHERE DEPARTMENT_ID = " +dpto);
+
+			l_empleados = new ArrayList<Empleado>();
+			Empleado e_auxiliar = null;
+			
+			while (resultset.next()) {
+				String nombre = resultset.getString("FIRST_NAME");
+				e_auxiliar = new Empleado(nombre);
+				l_empleados.add(e_auxiliar);
+				
+				System.out.println(nombre);
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				resultset.close();
+				statement.close();
+				connection.close();
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+		}
+
+		return l_empleados;
+	}
+	
 
 }

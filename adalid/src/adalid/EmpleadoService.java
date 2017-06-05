@@ -13,5 +13,16 @@ public class EmpleadoService {
 		
 		return l_empleados;
 	}
+	
+	public List<Empleado> getEmpleadosByDpto (int ndpto)
+	{
+		List<Empleado> l_empleados = null;
+		
+			EmpleadoBD empleadoBD = new EmpleadoBD();
+			l_empleados = empleadoBD.getEmpleadosBDByDpto(ndpto);
+		
+		return l_empleados;
+	}
+	
 
 }
